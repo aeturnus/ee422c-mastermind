@@ -3,9 +3,12 @@ package mastermind;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 
 public class Driver
 {
+
+	private static final boolean Boolean = false;
 
 	public static void main(String[] args) throws IOException
 	{
@@ -16,13 +19,50 @@ public class Driver
         	String input = reader.readLine().trim().toLowerCase();
 	        if (input.matches("y")) {
 	        	Board board = new Board(false);
-	        	while(board.getNumGuesses() < 12)
+	        	Boolean doneFlag = false;
+	        	while(doneFlag == false)
 	        	{
-		        	board.makeGuess(new SecretCode(new Peg[]{Peg.randomEntryPeg(),Peg.randomEntryPeg(),Peg.randomEntryPeg(),Peg.randomEntryPeg()}));
-		        	System.out.println(board.getNumGuesses());
-		    		System.out.println(board.toString());
+	        		try {
+		        		System.out.println("\n" + board.toString());
+		        		System.out.print("Enter your guess: ");
+		        		input = reader.readLine().trim().toLowerCase();
+		        		if (input.length() != 4) {
+		        			System.out.println("\nWrong number of characters, you can only guess four colors!");
+		        		}
+		        		else {
+			        		Peg[] guess = new Peg[4];
+			        		int i = 0;
+			        		//build guess array, theres probably a better way to do this
+			        		for (char ch : input.toUpperCase().toCharArray()) {
+			        			guess[i] = Peg.fromString(Character.toString(ch));
+			        			if (guess[i] == null)
+			        			{
+			        				throw new IOException();
+			        			}
+			        			i++;
+			        		}
+				        	board.makeGuess(new SecretCode(guess));
+		        		}
+		        		for (FeedbackCode feedback : board.getFeedback())
+		        		{
+		        			if(feedback.checkWin())
+		        			{
+		        				System.out.println("\nCongratualations you win!");
+		        				doneFlag = true;
+		        			}
+		        		}
+		        		if (board.getNumGuesses() == 12)
+		        		{
+		        			System.out.println("\n" + board.toString());
+		        			System.out.println("You ran out of guesses!");
+		        			doneFlag = true;
+		        		}
+	        		}
+	        		catch (IOException e) {
+	        			System.out.println("\nYou entered a peg that doesn't match the available colors, please try again!");
+	        		}
 	        	}
-	        	System.out.print("Thanks for playing, would you like to play again? (Y/N): ");
+	        	System.out.print("\nThanks for playing, would you like to play again? (Y/N): ");
 	        }
 	        else {
 	        	System.out.println("Thanks for playing! (or not)");
