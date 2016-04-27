@@ -23,7 +23,7 @@ public class Driver
 	        	while(doneFlag == false)
 	        	{
 	        		try {
-		        		System.out.println("\n" + board.toString());
+		        		System.out.println("\n" + board.printBoard(true) + "\nThe available colors are: " + Arrays.toString(Peg.values()) + "\n");
 		        		System.out.print("Enter your guess: ");
 		        		input = reader.readLine().trim().toLowerCase();
 		        		if (input.length() != 4) {
@@ -51,9 +51,9 @@ public class Driver
 		        				doneFlag = true;
 		        			}
 		        		}
-		        		if (board.getNumGuesses() == 12)
+		        		if (board.getNumGuesses() == board.maxGuesses())
 		        		{
-		        			System.out.println("\n" + board.toString());
+		        			System.out.println("\n" + board.printBoard(true));
 		        			System.out.println("You ran out of guesses!");
 		        			doneFlag = true;
 		        		}
