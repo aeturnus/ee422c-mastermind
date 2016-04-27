@@ -90,4 +90,40 @@ public class Board
 		return output;
 	}
 	
+	/*
+	 * returns the array of guesses for a given board instance encoded as characters
+	 */
+	public SecretCode[] getGuesses(){
+		return secrets;
+	}
+	
+	/*
+	 * returns the number of guess that a given board has had
+	 */
+	public int getNumGuesses(){
+		return guessCounter;
+	}
+	
+	/*
+	 * returns the max number of guesses for a board
+	 */
+	public int maxGuesses(){
+		return guesses;
+	}
+	
+	/*
+	 * checks if a board allows repeats
+	 */
+	public Boolean checkRepeats(){
+		return repeats;
+	}
+	
+	/*
+	 * returns the array of feedback codes for a given board instance encoded as characters
+	 */
+	public FeedbackCode[] getFeedback(){
+		return feedback;
+	}
+	
+	
 }
