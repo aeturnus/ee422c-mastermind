@@ -6,5 +6,13 @@ package mastermind;
  */
 public class FeedbackCode extends Code
 {
-
+	public boolean checkWin(){
+		int length = pegs.length;
+		for(int i = 0; i < length; i++){
+			if(pegs[i] == Peg.WHITE || pegs[i] == Peg.EMPTY){
+				return false;
+			}
+		}
+		return true;
+	}
 }
