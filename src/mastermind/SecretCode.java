@@ -73,7 +73,7 @@ public class SecretCode extends Code
 					if(myPegs[i] == otherPegs[j]){
 						presentCount++;
 						myPegs[i] = Peg.EMPTY;
-						otherPegs[i] = Peg.EMPTY;
+						otherPegs[j] = Peg.EMPTY;
 						break;	//this peg check has claimed this peg
 					}
 				}
