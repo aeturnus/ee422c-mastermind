@@ -29,11 +29,18 @@ public class Code
 	}
 	
 	/**
-	 * Returns the pegs array of this code
-	 * Protected so no external users can
-	 * modify Code contents
+	 * Set this code's pegs to the other's
 	 */
-	protected Peg[] getPegs(){
+	public void setPegs(Code other){
+		for(int i = 0; i < LENGTH; i++){
+			pegs[i] = other.pegs[i];
+		}
+	}
+	
+	/**
+	 * Returns the pegs array of this code
+	 */
+	public Peg[] getPegs(){
 		return pegs;
 	}
 	
@@ -52,6 +59,15 @@ public class Code
 			output += pegs[i].toString();
 		}
 		return output;
+	}
+	
+	public boolean equals(Code other){
+		for(int i = 0; i < LENGTH; i++){
+			if(pegs[i] != other.pegs[i]){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

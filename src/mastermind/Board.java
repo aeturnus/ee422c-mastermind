@@ -90,6 +90,13 @@ public class Board
 		return output;
 	}
 	
+	/**
+	 * returns the master code 
+	 */
+	public SecretCode getMaster(){
+		return master;
+	}
+	
 	/*
 	 * returns the array of guesses for a given board instance encoded as characters
 	 */
