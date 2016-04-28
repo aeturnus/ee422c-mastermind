@@ -21,12 +21,20 @@ public enum Peg
 	private final String name;	//Character code to return
 	
 	//Arrays for the different kinds of pegs
-	private static Peg[] entry = {BLUE,GREEN,ORANGE,PURPLE,RED,YELLOW};
-	private static Peg[] feedback= {BLACK,WHITE};
+	private final static Peg[] entry = {BLUE,GREEN,ORANGE,PURPLE,RED,YELLOW};
+	private final static Peg[] feedback= {BLACK,WHITE};
 	
 	Peg(Color color, String name){
 		this.color = color;
 		this.name = name;
+	}
+	
+	/**
+	 * Returns an array of valid entry pegs
+	 * @return
+	 */
+	public static Peg[] getValidEntries(){
+		return entry;
 	}
 	
 	/**
@@ -53,6 +61,22 @@ public enum Peg
 		return entry[index];
 	}
 	
+	public static Peg fromStringEntry(String text){
+		if (text != null) {
+	      for (Peg p : entry) {
+	        if (text.equalsIgnoreCase(p.name)) {
+	          return p;
+	        }
+	      }
+	    }
+	    return null;
+	}
+	
+	/**
+	 * Generic from string; can capture all
+	 * @param text
+	 * @return
+	 */
 	public static Peg fromString(String text) {
 	    if (text != null) {
 	      for (Peg p : Peg.values()) {

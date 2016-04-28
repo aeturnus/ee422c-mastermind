@@ -23,40 +23,37 @@ public class Driver
 	        	while(doneFlag == false)
 	        	{
 	        		try {
-	        			System.out.println("\n" + board.printBoard(true) + "\nThe available colors are: " + Arrays.toString(Peg.values()) + "\n");
+	        			System.out.println("\n" + board.printBoard(true) + "\nThe available colors are: " + Arrays.toString(Peg.getValidEntries()) + "\n");
 		        		System.out.print("Enter your guess: ");
 		        		input = reader.readLine().trim().toLowerCase();
 		        		if (input.length() != 4) {
 		        			System.out.println("\nWrong number of characters, you can only guess four colors!");
-		        		}
-		        		else {
+		        		} else {
 			        		Peg[] guess = new Peg[4];
 			        		int i = 0;
 			        		//build guess array, theres probably a better way to do this
 			        		for (char ch : input.toUpperCase().toCharArray()) {
-			        			guess[i] = Peg.fromString(Character.toString(ch));
-			        			if (guess[i] == null)
-			        			{
+			        			guess[i] = Peg.fromStringEntry(Character.toString(ch));
+			        			if (guess[i] == null) {
 			        				throw new IOException();
 			        			}
 			        			i++;
 			        		}
-				        	board.makeGuess(new SecretCode(guess));
+				        	FeedbackCode feedback = board.makeGuess(new SecretCode(guess));
+							if(feedback.checkWin()) {
+								//Check if you win
+								System.out.println("\n" + board.toString());
+								System.out.println("\nCongratualations you win!");
+								doneFlag = true;
+							} else if (board.getNumGuesses() == board.maxGuesses()) {
+								//If we run out of guesses
+								System.out.println("\n" + board.printBoard(true));
+								System.out.println("You ran out of guesses!");
+								System.out.println("The master code was: " + board.getMaster());
+								doneFlag = true;
+							}
 		        		}
-		        		for (FeedbackCode feedback : board.getFeedback())
-		        		{
-		        			if(feedback.checkWin())
-		        			{
-		        				System.out.println("\nCongratualations you win!");
-		        				doneFlag = true;
-		        			}
-		        		}
-		        		if (board.getNumGuesses() == board.maxGuesses())
-		        		{
-		        			System.out.println("\n" + board.printBoard(true));
-		        			System.out.println("You ran out of guesses!");
-		        			doneFlag = true;
-		        		}
+		        		
 	        		}
 	        		catch (IOException e) {
 	        			System.out.println("\nYou entered a peg that doesn't match the available colors, please try again!");

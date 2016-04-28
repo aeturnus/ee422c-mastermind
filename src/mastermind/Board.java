@@ -57,19 +57,25 @@ public class Board
 	private void buildBoard(){
 		secrets = new SecretCode[guesses];
 		feedback = new FeedbackCode[guesses];
+		
+		master = new SecretCode();
 		for(int i = 0; i < guesses; i++){
 			secrets[i] = new SecretCode();
 			feedback[i] = new FeedbackCode();
 		}
-		master = SecretCode.generateCode(repeats);
+		
+		master.setPegs(SecretCode.generateCode(repeats));
 	}
 	
-	public void makeGuess(SecretCode code){
+	public FeedbackCode makeGuess(SecretCode code){
+		FeedbackCode feed= new FeedbackCode();
 		if(guessCounter < guesses){
-			secrets[guessCounter] = code;
-			feedback[guessCounter] = master.checkCode(code);
+			secrets[guessCounter].setPegs(code);
+			feed = master.checkCode(code);
+			feedback[guessCounter].setPegs(feed);
 			guessCounter++;
 		}
+		return feed;
 	}
 	
 	public String toString(){
