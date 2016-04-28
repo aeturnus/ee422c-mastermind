@@ -52,4 +52,15 @@ public enum Peg
 		int index = (int)(Math.random()*100)%entry.length;
 		return entry[index];
 	}
+	
+	public static Peg fromString(String text) {
+	    if (text != null) {
+	      for (Peg p : Peg.values()) {
+	        if (text.equalsIgnoreCase(p.name)) {
+	          return p;
+	        }
+	      }
+	    }
+	    return null;
+	  }
 }
