@@ -10,8 +10,8 @@ import java.util.ArrayList;
  */
 public class SecretCode extends Code
 {
-	public SecretCode(){
-		super();
+	public SecretCode(int length){
+		super(length);
 	}
 	public SecretCode(Peg[] values){
 		super(values);
@@ -21,11 +21,11 @@ public class SecretCode extends Code
 	 * @param repeat allow repeats
 	 * @return random secret code 
 	 */
-	public static SecretCode generateCode(boolean repeat){
+	public static SecretCode generateCode(int length, boolean repeat){
 		SecretCode code = null;
-		ArrayList<Peg> pegs = new ArrayList<Peg>(LENGTH);
+		ArrayList<Peg> pegs = new ArrayList<Peg>(length);
 		Peg temp;
-		for(int i = 0; i < LENGTH; i++){
+		for(int i = 0; i < length; i++){
 			temp = Peg.randomEntryPeg();
 			if(!repeat){
 				//if we're not repeating pegs, check for them
@@ -37,7 +37,7 @@ public class SecretCode extends Code
 		}
 		//Set up our new secret code with the arraylist
 		//and return it
-		Peg[] array = new Peg[4];
+		Peg[] array = new Peg[length];
 		array = pegs.toArray(array);
 		code = new SecretCode(array);
 		
@@ -50,7 +50,10 @@ public class SecretCode extends Code
 	 * @return
 	 */
 	public FeedbackCode checkCode(SecretCode other){
-		FeedbackCode output = new FeedbackCode();
+		FeedbackCode output = new FeedbackCode(length);
+		if(length != other.length){
+			return output;
+		}
 		Peg[] array = output.getPegs();	//Get the array for output: we can modify it
 		int exactCount = 0;		//Keep track of exact matches
 		int presentCount = 0;	//Keep track of how many non-place matches
@@ -59,7 +62,7 @@ public class SecretCode extends Code
 		Peg[] otherPegs  = other.copyOfPegs();
 		
 		//Check for place match
-		for(int i = 0; i < LENGTH; i++){
+		for(int i = 0; i < length; i++){
 			if(myPegs[i] == otherPegs[i]){
 				exactCount++;
 				myPegs[i] = Peg.EMPTY;
@@ -67,9 +70,9 @@ public class SecretCode extends Code
 			}
 		}
 		//Check for non-exact matches
-		for(int i = 0; i < LENGTH; i++){
+		for(int i = 0; i < length; i++){
 			if(myPegs[i] != Peg.EMPTY){
-				for(int j = 0; j < LENGTH; j++){
+				for(int j = 0; j < length; j++){
 					if(myPegs[i] == otherPegs[j]){
 						presentCount++;
 						myPegs[i] = Peg.EMPTY;

@@ -7,17 +7,14 @@ package mastermind;
  */
 public class Code
 {
-	public static final int LENGTH = 4;
+	protected int length;
 	protected Peg[] pegs;//holds the pegs representing this code
 	
 	/**
 	 * Constructor to make an empty code
 	 */
-	public Code(){
-		pegs = new Peg[LENGTH];
-		for(int i = 0; i < LENGTH; i++){
-			pegs[i] = Peg.EMPTY;	//empty
-		}
+	public Code(int length){
+		resize(length);
 	}
 	
 	/**
@@ -26,15 +23,44 @@ public class Code
 	 */
 	public Code(Peg[] values){
 		pegs = values;
+		length = values.length;
 	}
 	
 	/**
 	 * Set this code's pegs to the other's
 	 */
 	public void setPegs(Code other){
-		for(int i = 0; i < LENGTH; i++){
-			pegs[i] = other.pegs[i];
+		if(length == other.length){
+			for(int i = 0; i < length; i++){
+				pegs[i] = other.pegs[i];
+			}
+		} else {
+			length = other.length;
+			pegs = new Peg[length];
+			for(int i =0; i < length; i++){
+				pegs[i] = other.pegs[i];
+			}
 		}
+	}
+	
+	/**
+	 * Resizes the code, clearing it and setting it to the size
+	 * @param length
+	 */
+	public void resize(int length){
+		this.length = length;
+		pegs = new Peg[length];
+		for(int i = 0; i < length; i++){
+			pegs[i] = Peg.EMPTY;	//empty
+		}
+	}
+	
+	/**
+	 * Returns length of code
+	 * @return
+	 */
+	public int getLength(){
+		return length;
 	}
 	
 	/**
@@ -62,7 +88,10 @@ public class Code
 	}
 	
 	public boolean equals(Code other){
-		for(int i = 0; i < LENGTH; i++){
+		if(length != other.length){
+			return false;
+		}
+		for(int i = 0; i < length; i++){
 			if(pegs[i] != other.pegs[i]){
 				return false;
 			}

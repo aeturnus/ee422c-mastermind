@@ -6,6 +6,9 @@ package mastermind;
  */
 public class FeedbackCode extends Code
 {
+	public FeedbackCode(int length){
+		super(length);
+	}
 	public boolean checkWin(){
 		int length = pegs.length;
 		for(int i = 0; i < length; i++){
