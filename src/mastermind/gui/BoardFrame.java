@@ -18,7 +18,7 @@ public class BoardFrame extends JFrame
 	}
 	
 	public static void main(String[] args){
-		Board board = new Board();
+		Board board = new Board(12,6,false);
 		for(int i = 0; i < 6; i++)
 			//board.makeGuess(new SecretCode(new Peg[]{Peg.BLUE,Peg.ORANGE,Peg.GREEN,Peg.YELLOW}));
 			board.makeGuess(new SecretCode(new Peg[]{Peg.randomEntryPeg(),Peg.randomEntryPeg(),Peg.randomEntryPeg(),Peg.randomEntryPeg()}));
