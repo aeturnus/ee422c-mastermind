@@ -1,3 +1,8 @@
+/*
+ * Mastermind Project 7
+ * yuriy minin, eid: ykm93
+ * brandon nguyen, eid: btn366
+ */
 package mastermind;
 
 import java.io.BufferedReader;
@@ -65,7 +70,7 @@ public class Driver{
 	        	Board board = new Board(guesses,codeLength,false);
 	        	Boolean doneFlag = false;
 	        	
-	        	System.out.println(String.format("\nNote that %s is white and %s is black",Peg.WHITE.toString(),Peg.BLACK.toString()));
+	        	System.out.println(String.format("\nNote that %s is white and %s is black",Peg.WHITE.toString(),Peg.BLACK.toString())); //dang brandon why 
 	        	System.out.println("Type \"help\" for more commands!");
 	        	while(doneFlag == false)
 	        	{
@@ -139,7 +144,7 @@ public class Driver{
 	        	System.out.print("\nThanks for playing, would you like to play again? (Y/N): ");
 	        }
 	        else {
-	        	System.out.println("Thanks for playing! (or not)");
+	        	System.out.println("\nThanks for playing! (or not)");
 	        	System.exit(0);
 				//board.makeGuess(new SecretCode(new Peg[]{Peg.BLUE,Peg.RED,Peg.PURPLE,Peg.GREEN}));
 			}

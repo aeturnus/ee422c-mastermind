@@ -7,3 +7,5 @@
 ###Main class: mastermind.Driver
 
 An experimental GUI was worked on and is present in the **mastermind.gui** package in the GitHub repository. It does not fully work and is only able to read the state of a board object.
+
+

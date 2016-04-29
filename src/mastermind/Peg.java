@@ -1,3 +1,8 @@
+/*
+ * Mastermind Project 7
+ * yuriy minin, eid: ykm93
+ * brandon nguyen, eid: btn366
+ */
 package mastermind;
 
 import java.awt.Color;
