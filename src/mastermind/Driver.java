@@ -5,15 +5,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-public class Driver
-{
+public class Driver{
 
-	public static void main(String[] args) throws IOException
-	{
-		int codeLength = 4;
-		int guesses = 12;
-		boolean debug = false;
-		boolean printon = false;
+	public static void main(String[] args) throws IOException{
+		int codeLength = 4;			//How long each code is
+		int guesses = 12;			//how many guesses
+		boolean debug = false;		//if we're in debug mode
+		boolean printon = false;	//if we print the board every time
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		System.out.println("\nWelcome to Mastermind.  Here are the rules. \n\nThis is a text version of the classic board game Mastermind. \nThe computer will think of a secret code. The code consists of 4 colored pegs. \nThe pegs may be one of six colors: blue, green, orange, purple, red, or yellow. \nA color may appear more than once in the code. \nYou try to guess what colored pegs are in the code and what order they are in. \nAfter you make a valid guess the result (feedback) will be displayed. \nThe result consists of a black peg for each peg you have guessed exactly correct (color and position) in your guess.  \nFor each peg in the guess that is the correct color, but is out of position, you get a white peg. \nFor each peg, which is fully incorrect, you get no feedback.");
 		System.out.print("\nOnly the first letter of the color is displayed. B for Blue, R for Red, and so forth. \nWhen entering guesses you only need to enter the first character of each color as a capital letter.\nYou have 12 guesses to figure out the secret code or you lose the game.  \n\nAre you ready to play? (Y/N): ");
@@ -72,6 +70,7 @@ public class Driver
 	        	while(doneFlag == false)
 	        	{
 	        		try {
+	        			//Check for commands
 	        			if(printon){
 	        				System.out.println("\n" + board.printBoard(!debug));
 	        			}
@@ -98,9 +97,9 @@ public class Driver
 		        		} else if (input.equals("history")){
 		        			System.out.println(board.printBoard(!debug));
 		        		} else if (input.equals("printon")){
-		        			printon = true;
+		        			printon = true;	//enable printing board every turn
 		        		} else if (input.equals("printoff")){
-		        			printon = false;
+		        			printon = false;	//disable printing board every turn
 		        		} else if (input.length() != codeLength) {
 		        			System.out.println("\nWrong number of characters, you can only guess " + codeLength + " colors!");
 		        		} else {
